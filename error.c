@@ -78,5 +78,45 @@ void error_message(int flag, int line_number, int coluna_number)
         printf("Final do arquivo ([%d])\n", line_number);
         exit(1);
 	}
+    case   ERROR_SINTATICO:
+        printf("Erro sintatico na linha %d \n", line_number);
+        exit(1);
+    case ERROR_STACK_FULL:
+        printf("Tabela de simbolos cheia \n");
+        exit(1);
+    case ERROR_STACK_EMPTY:
+        printf("Tabela de simbolos vazia\n");
+        exit(1);
+    case ESPERANDO_PROC:
+      	printf("Erro esperado \"proc\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ENDPROC:
+   	printf("Erro esperado \"endproc\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_EXP:
+        printf("Erro esperado expressao na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ELSE:
+     	printf("Erro esperado \"else\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ENDELSE:
+     	printf("Erro esperado \"endelse\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ATRIB:
+     	printf("Erro esperado atribuicao na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ENDFOR:
+     	printf("Erro esperado \"endfor\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ENDWHILE:
+     	printf("Erro esperado \"endfor\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ID_OU_CT_NO_CMD_DISPLAY:
+     	printf("Erro esperado um ID ou uma constate em display na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ID_OU_CT_DUP:
+      	printf("Erro esperado ID ou constante ou DUP na linha %d\n", line_number);
+        exit(1);
+	}
     exit(1);
 }
