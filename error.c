@@ -77,10 +77,6 @@ void error_message(int flag, int line_number, int coluna_number)
     case FINAL_DO_ARQUIVO:
         printf("Final do arquivo ([%d])\n", line_number);
         exit(1);
-	}
-    case   ERROR_SINTATICO:
-        printf("Erro sintatico na linha %d \n", line_number);
-        exit(1);
     case ERROR_STACK_FULL:
         printf("Tabela de simbolos cheia \n");
         exit(1);
