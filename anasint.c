@@ -335,12 +335,45 @@ int check_cmd(){
             if(!(token.cat == PR && token.n == ENDFOR))
                 error_message(ESPERANDO_ENDFOR, linha, coluna);
             return 1;
+	    
         case WHILE:
-        //TODO
-        case RETURN:
-        //TODO
+           next_token();
+            if(!(token.cat == OP && token.n == ABREPARENTESE))
+                error_message(ESPERANDO_ABRE_PAREN,linha,coluna);
+            next_token();
+            if(!check_exp())
+                error_message(ESPERANDO_EXP,linha,coluna);
+            next_token();
+            if(!(token.cat == OP && token.n == FECHAPARENTESE))
+                error_message(ESPERANDO_FECHA_PAREN,linha,coluna);
+            next_token();
+            if(!check_cmd())
+                error_message(ESPERANDO_CMD, linha,coluna);
+            next_token();
+            while(check_cmd())
+                next_token();
+            if(!(token.cat == PR && token.n ==  ENDWHILE))
+                error_message(ESPERANDO_ENDWHILE,linha,coluna);
+            return 1;
+        
+        
         case KEYBOARD:
-        case DISPLAY:
+            next_token();
+            if(!(token.n == ID))
+                error_message(ESPERANDO_ID,linha,coluna);
+            next_token();
+            while(token.cat == OP && token.n == VIRGULA){
+                next_token();
+                if(!(token.n == ID))
+                    error_message(ESPERANDO_ID,linha,coluna);
+                next_token();
+            }
+            return 1;
+            
+            default:
+            return 0;
+            
+        
             
 
 
