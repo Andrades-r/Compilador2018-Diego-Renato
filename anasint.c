@@ -253,6 +253,7 @@ int check_procedure(){
     return 0;
 }
 
+
 int check_cmd(){
     if(token.cat == PR){
         switch(token.n){
@@ -278,7 +279,6 @@ int check_cmd(){
             if(!(token.cat == OP && token.n == FECHAPARENTESE))
                 error_message(ESPERANDO_FECHA_PAREN, linha, coluna);
             return 1;
-        }
         //comando if
         case IF:
             next_token();
@@ -336,16 +336,81 @@ int check_cmd(){
                 error_message(ESPERANDO_ENDFOR, linha, coluna);
             return 1;
         case WHILE:
-        //TODO
-        case RETURN:
-        //TODO
+            next_token();
+            if(!(token.cat == OP && token.n == ABREPARENTESE))
+                error_message(ESPERANDO_ABRE_PAREN,linha,coluna);
+            next_token();
+            if(!check_exp())
+                error_message(ESPERANDO_EXP,linha,coluna);
+            next_token();
+            if(!(token.cat == OP && token.n == FECHAPARENTESE))
+                error_message(ESPERANDO_FECHA_PAREN,linha,coluna);
+            next_token();
+            if(!check_cmd())
+                error_message(ESPERANDO_CMD, linha,coluna);
+            next_token();
+            while(check_cmd())
+                next_token();
+            if(!(token.cat == PR && token.n ==  ENDWHILE))
+                error_message(ESPERANDO_ENDWHILE,linha,coluna);
+            return 1;
         case KEYBOARD:
+            next_token();
+            if(!(token.n == ID))
+                error_message(ESPERANDO_ID,linha,coluna);
+            next_token();
+            while(token.cat == OP && token.n == VIRGULA){
+                next_token();
+                if(!(token.n == ID))
+                    error_message(ESPERANDO_ID,linha,coluna);
+                next_token();
+            }
+            return 1;
         case DISPLAY:
-            
-
-
-
-
-
+            next_token();
+            if(!(check_id() || token.cat == CT_I || token.cat == CT_R || token.cat == CT_S || token.cat == CT_CH))
+                error_message(ESPERANDO_ID_OU_CT_NO_CMD_DISPLAY, linha,coluna);
+            next_token();
+            if(token.cat == PR && token.n == DUP){
+                next_token();
+                if(!(check_id() || token.cat == CT_I))
+                    error_message(ESPERANDO_ID_OU_CT_DUP, linha,coluna);
+            }
+            while(tokenAhead.cat == OP && tokenAhead.n == VIRGULA){
+                next_token();
+                next_token();
+                if(!(check_id() || token.cat == CT_I || token.cat == CT_R || token.cat == CT_S || token.cat == CT_CH))
+                    error_message(ESPERANDO_ID_OU_CT_NO_CMD_DISPLAY, linha,coluna);
+                 if(token.cat == PR && token.n == DUP){
+                    next_token();
+                    next_token();
+                    if(!(check_id() || token.cat == CT_I))
+                        error_message(ESPERANDO_ID_OU_CT_DUP, linha,coluna);
+                 }
+            }
+            return 1;
+        case RETURN:
+            next_token();
+            if(!(token.cat == OP && token.n == ABREPARENTESE))
+                error_message(ESPERANDO_ABRE_PAREN, linha, coluna);
+            next_token();
+            if(!check_exp())
+                error_message(ESPERANDO_EXP);
+            next_token();
+            if(!(token.cat == OP && token.n ==  FECHAPARENTESE))
+                error_message(ESPERANDO_FECHA_PAREN,linha,coluna);
+            return 1;
+        default:
+          return 0;
+        }
+        if(token.cat ==ID){
+            if(tokenAhead == OP && tokenAhead.n == IGUAL)
+                return check_atri();
+            else return 0;
+        }
+        if(token.cat == OP and token.n == PONTO_VIRGULA){
+            return 1;
+        }
+        return 0;
     }
 }
