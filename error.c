@@ -8,9 +8,6 @@ void error_message(int flag, int line_number, int coluna_number)
 {
     switch (flag)
     {
-    case ERROR_ENDFUNC:
-        printf("Error: falta endfunc na linha [%d] e coluna [%d]... \n", line_number, coluna_number);
-        exit(1);
     case ERROR_STACK_FULL:
         printf("Error: endereco maior do que o permitido no vetor... \n", line_number, coluna_number);
         exit(1);
@@ -77,12 +74,6 @@ void error_message(int flag, int line_number, int coluna_number)
     case FINAL_DO_ARQUIVO:
         printf("Final do arquivo ([%d])\n", line_number);
         exit(1);
-    case ERROR_STACK_FULL:
-        printf("Tabela de simbolos cheia \n");
-        exit(1);
-    case ERROR_STACK_EMPTY:
-        printf("Tabela de simbolos vazia\n");
-        exit(1);
     case ESPERANDO_PROC:
       	printf("Erro esperado \"proc\" na linha %d\n", line_number);
         exit(1);
@@ -112,6 +103,15 @@ void error_message(int flag, int line_number, int coluna_number)
         exit(1);
     case ESPERANDO_ID_OU_CT_DUP:
       	printf("Erro esperado ID ou constante ou DUP na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_ENDFUNC:
+     	printf("Erro esperado \"endfunc\" na linha %d\n", line_number);
+        exit(1);
+    case ESPERANDO_TERM:
+     	printf("Erro esperado termo na linha %d\n", line_number);
+        exit(1);
+    case  ESPERANDO_EXP_SIMPLES:
+        printf("Erro esperado expressao simples na linha %d\n", line_number);
         exit(1);
 	}
     exit(1);

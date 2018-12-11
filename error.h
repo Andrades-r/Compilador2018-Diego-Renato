@@ -34,7 +34,10 @@ enum code_error
   ESPERANDO_ENDFOR,
   ESPERANDO_ENDWHILE,
   ESPERANDO_ID_OU_CT_NO_CMD_DISPLAY,
-  ESPERANDO_ID_OU_CT_DUP
+  ESPERANDO_ID_OU_CT_DUP,
+  ESPERANDO_ENDFUNC,
+  ESPERANDO_TERM,
+  ESPERANDO_EXP_SIMPLES
 };
 
 void error_message(int flag, int line_number, int coluna_number);
