@@ -253,10 +253,6 @@ int check_procedure(){
     return 0;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8390b206d5ccdc4fdcf784848f9e93c2c3eb5905
 int check_cmd(){
     if(token.cat == PR){
         switch(token.n){
