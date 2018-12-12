@@ -50,7 +50,7 @@ int type() {
     return(token.cat == PR && (token.cat == INT || token.cat == REAL || token.cat == CHAR));
 }
 
-void check_var() {
+int check_var() {
     while(type()) {
         next_token();
         if(token.cat == ID) {
@@ -60,7 +60,6 @@ void check_var() {
                     error_message(ERROR_SINTATICO, get_linha(), get_coluna());
                 }
             }
-
             if(token.cat != PR && strcmp(token.s, "endvar") != 0) {
                 error_message(ESPERANDO_ENDVAR, get_linha(), get_coluna());
             }
@@ -69,6 +68,7 @@ void check_var() {
         }
     }
     next_token();
+    return 1;
 }
 
 int check_declaration_var(simbolo *s) {
