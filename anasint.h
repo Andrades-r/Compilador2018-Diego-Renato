@@ -26,7 +26,7 @@ simbolo newId(int escopo,char *nome,char *cat,char *tipo);
 int findSymbol(char *t);
 int next_token();
 int type();
-void check_var();
+int check_var();
 int check_declaration_var(simbolo *s);
 int check_param();
 int check_function();
