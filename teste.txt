@@ -1,1 +1,7 @@
-char = 'a;
+pl Programa
+var int a,b endvar
+prog
+if( a < b )
+b>a
+endif
+endprog

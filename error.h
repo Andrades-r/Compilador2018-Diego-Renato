@@ -37,8 +37,13 @@ enum code_error
   ESPERANDO_ID_OU_CT_DUP,
   ESPERANDO_ENDFUNC,
   ESPERANDO_TERM,
-  ESPERANDO_EXP_SIMPLES
+  ESPERANDO_EXP_SIMPLES,
+  ERROR_NO_RESERVED_WORD,
+  ERROR_ENDPROG,
+  ERROR_ENDFUNC,
+  ESPERANDO_ENDIF,
+  ESPERANDO_FATOR
 };
 
-void error_message(int flag, int line_number, int coluna_number);
+void error_message(int flag);
 #endif // ERRO

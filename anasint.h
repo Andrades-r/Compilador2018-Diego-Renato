@@ -41,7 +41,7 @@ void start_Token();
 int check_atrib();
 int check_procedure();
 int check_cmd();
-
+void printToken();
 
 
 
